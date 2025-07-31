@@ -1,0 +1,89 @@
+#pragma once
+
+#include "NativeGameplayTags.h"
+
+namespace RPGGameplayTags
+{
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_ChangeEquipment);
+
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_PlayerMovement);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Skill_DefaultAttack);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Skill_Dodge);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Skill_TripleSlash);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Skill_HurricaneKick);
+
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Combat_QueryDamage);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Combat_EnableNextCombo);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Combat_SpawnProjectile);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Combat_UpdateFacingTarget);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_HitReact);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(State_Dead);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Effect_Duration);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Effect_Percentage);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(NPCInteraction_StartInteraction);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(NPCInteraction_EndInteraction);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Inventory_UpdateGold);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Quest_Action_Accept);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Quest_Action_Drop);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Quest_Action_Complete);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Quest_ChangeState);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Quest_Notify_TaskSignal);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_HP);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_Exp);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_MaxExp);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_MaxHP_Base);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_MaxHP_Flat);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_MaxHP_Percent);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_Attack_Base);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_Attack_Flat);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_Attack_Percent);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_Defense_Base);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_Defense_Flat);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_Defense_Percent);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_CriticalRate_Base);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_CriticalRate_Flat);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_CriticalRate_Percent);
+
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_MoveSpeed_Base);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_MoveSpeed_Flat);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Attribute_MoveSpeed_Percent);
+
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Skill_Attribute_BaseDamage);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Skill_Attribute_AttackCoefficient);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Skill_Attribute_ChannelingTime);
+
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_Inventory_UpdateSlotSize)
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_Inventory_UpdateSlot);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_Inventory_UpdateTooltip);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_Equipment_UpdateSlot);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_QuickBar_UpdateSlot);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_QuickBar_UpdateCooldown);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_SkillTree_Initialize);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_SkillTree_SkillPointUp);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_SkillTree_UpdateTooltip);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_Slot_Interaction);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_Slot_DragDrop);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_Dialogue_UpdateDialogue);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_Quest_ShowNpcQuestInfo);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Widget_Quest_UpdateNpcQuestList);
+	
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Attack_1);
+	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Attack_2);
+}
