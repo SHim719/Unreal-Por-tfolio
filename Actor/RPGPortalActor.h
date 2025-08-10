@@ -21,11 +21,11 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void Interact()	override;
 
-		
+
 protected:
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<USphereComponent> SphereComponent;
-
+	
 	UPROPERTY(EditAnywhere)
 	FName ChangeLevelName;
 	

@@ -8,13 +8,13 @@
 #include "RPGPlayerCharacter.generated.h"
 
 
+class URPGEquipMeshManagerComponent;
 class ARPGEquipmentActor;
 struct FOnPlayerChangeEquipmentMsg;
 class USplineComponent;
 class UNiagaraSystem;
 class URPGInteractionComponent;
 class USphereComponent;
-class URPGMovementHandlerComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class ARPGPlayerCaptureCharacter;
@@ -27,24 +27,18 @@ class RPGPROJECT_API ARPGPlayerCharacter : public ARPGCharacterBase
 public:
 	ARPGPlayerCharacter();
 	virtual void BeginPlay() override;
-	void Initialize();
-protected:
 
+protected:
 	virtual void InitAbilityInfo() override;
 	virtual void Die() override;
 	
 	void OnLevelChanged(const int32 NewLevel, bool bLevelUp) const;
-	void HandleOnPlayerEquipmentChange(FGameplayTag, const FOnPlayerChangeEquipmentMsg& Msg);
 
 	UFUNCTION()
 	void OnInteractionSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION()
 	void OnInteractionSphereEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-private:
-	UPROPERTY()
-	TObjectPtr<ARPGEquipmentActor> WeaponActor;
-	
 
 private:
 	UPROPERTY(EditDefaultsOnly)
@@ -71,6 +65,8 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<URPGInteractionComponent>		InteractionComponent;
-	
+
+	UPROPERTY(BlueprintReadWrite, meta=(AllowPrivateAccess="true"))
+	TObjectPtr<URPGEquipMeshManagerComponent>	EquipMeshManagerComponent;
 
 };

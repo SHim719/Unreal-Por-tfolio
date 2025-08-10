@@ -5,6 +5,7 @@
 #include "DropItem/RPGDropItemActor.h"
 #include "GameFramework/PlayerStart.h"
 #include "Kismet/GameplayStatics.h"
+#include "LevelChange/RPGLevelChangeManager.h"
 #include "ObjectPool/RPGPoolManager.h"
 
 void ARPGGameMode::BeginPlay()
@@ -15,12 +16,6 @@ void ARPGGameMode::BeginPlay()
 	{
 		HUD->Initialize();
 	}
-
-	if (auto* PlayerDataManager = RPGHelper::GetPlayerDataManager(this))
-	{
-		PlayerDataManager->LoadCurrentPlayerData();
-	}
-	
 	
 	if (auto* PoolManager = RPGHelper::GetPoolManager(this))
 	{
@@ -31,6 +26,18 @@ void ARPGGameMode::BeginPlay()
 		
 	}
 	
+}
+
+
+
+void ARPGGameMode::HandleMatchHasStarted()
+{
+	Super::HandleMatchHasStarted();
+
+	if (auto* PlayerDataManager = RPGHelper::GetPlayerDataManager(this))
+	{
+		PlayerDataManager->LoadCurrentPlayerData();
+	}
 }
 
 AActor* ARPGGameMode::ChoosePlayerStart_Implementation(AController* Player)
@@ -46,12 +53,14 @@ AActor* ARPGGameMode::ChoosePlayerStart_Implementation(AController* Player)
 	{
 		if (APlayerStart* CurrentPlayerStart = Cast<APlayerStart>(PlayerStart))
 		{
-			if (CurrentPlayerStart->PlayerStartTag.ToString().Equals(GameInstance->PlayerStartTag.ToString(), ESearchCase::IgnoreCase)) 
+			if (URPGLevelChangeManager* LevelChangeManager = GetGameInstance()->GetSubsystem<URPGLevelChangeManager>())
 			{
-				return CurrentPlayerStart;
+				if (CurrentPlayerStart->PlayerStartTag.ToString().Equals(LevelChangeManager->PlayerStartTag.ToString(), ESearchCase::IgnoreCase)) 
+				{
+					return CurrentPlayerStart;
+				}
 			}
 		}
-	
 	}
 
 	return nullptr;

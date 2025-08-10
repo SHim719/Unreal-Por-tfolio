@@ -9,8 +9,7 @@ void URPGQuickBarWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	Slots.SetNum(5);
-	SlotKeyTextBlocks.SetNum(5);
+	Slots.SetNum(QuickBarSlotNum);
 
 	BindWidgets();
 	RPGMessage::RegisterListener(GetWorld(), FGameplayTag::RequestGameplayTag(TEXT("Widget.QuickBar.UpdateSlot")), this, &ThisClass::HandleUpdateQuickBarSlot);
@@ -21,13 +20,10 @@ void URPGQuickBarWidget::BindWidgets()
 {
 	for (int i = 0; i < Slots.Num(); ++i)
 	{
-		Slots[i] = Cast<URPGSlotWidget>(GetWidgetFromName(FName(FString::Printf(TEXT("QuickSlot_%d"), i + 1))));
+		Slots[i] = Cast<URPGSlotWidget>(GetWidgetFromName(FName(FString::Printf(TEXT("QuickBarSlot_%d"), i))));
 		check(Slots[i]);
 		Slots[i]->SetSlotIndex(i);
 		Slots[i]->SetSlotType(ESlotType::Quick);
-		
-		SlotKeyTextBlocks[i] = Cast<UTextBlock>(GetWidgetFromName(FName(FString::Printf(TEXT("SlotKeyText_%d"), i + 1))));
-		check(SlotKeyTextBlocks[i]);
 	}
 	
 }

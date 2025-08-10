@@ -132,8 +132,12 @@ void ARPGPlayerController::BindInteractionInput(UEnhancedInputComponent* Enhance
 {
 	if (InteractAction == nullptr)
 		return;
+
+	APawn* OwnerPawn = GetPawn();
+	if (OwnerPawn == nullptr)
+		return;
 	
-	if (URPGInteractionComponent* InteractionComponent = GetPawn()->FindComponentByClass<URPGInteractionComponent>())
+	if (URPGInteractionComponent* InteractionComponent = OwnerPawn->FindComponentByClass<URPGInteractionComponent>())
 	{
 		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, InteractionComponent, &URPGInteractionComponent::Interact);
 	}

@@ -22,9 +22,6 @@
 
 ARPGEnemy::ARPGEnemy()
 {
-	HpBarComponent = CreateDefaultSubobject<UWidgetComponent>("HpBar");
-	HpBarComponent->SetupAttachment(GetRootComponent());
-
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
 	WeaponMesh->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
 	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -37,15 +34,13 @@ void ARPGEnemy::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	if (BehaviorTree == nullptr)
-		return;
-
 	if (AAIController* AIController = Cast<AAIController>(NewController))
 	{
 		UBlackboardData* BlackboardData = BehaviorTree->GetBlackboardAsset();
 		AIController->GetBlackboardComponent()->InitializeBlackboard(*BlackboardData);
-		AIController->RunBehaviorTree(BehaviorTree);
 	}
+
+	
 }
 
 void ARPGEnemy::BeginPlay()
@@ -57,6 +52,7 @@ void ARPGEnemy::BeginPlay()
 		BindAttributeDelegate();
 		InitAttributes();
 	});
+
 	
 }
 
@@ -98,14 +94,7 @@ void ARPGEnemy::Die()
 		AbilitySystemComponent->CancelAllAbilities();
 	}
 	
-	if (bIsBoss)
-	{
-		if (auto* BossHpBar = Cast<URPGBossHpBar>(RPGHelper::GetWidgetInMainWidgetFromName(this, FName("BossHpBar"))))
-		{
-			BossHpBar->SetVisibility(ESlateVisibility::Collapsed);
-		}
-	}
-	
+
 	GiveExpToPlayer();
 	DropItems();
 	BroadcastKillEnemyMsg();
@@ -141,60 +130,19 @@ void ARPGEnemy::InitAttributes()
 	AbilitySystemComponent->GenericGameplayEventCallbacks.FindOrAdd(FGameplayTag::RequestGameplayTag(FName("GameEvent.OnHit"))).AddUObject(this, &ThisClass::OnHit);
 }
 
-void ARPGEnemy::BindAttributeDelegate() 
+void ARPGEnemy::BindAttributeDelegate()
 {
-	const FRPGEnemyDataRow* EnemyDataRow = RPGHelper::GetEnemyDataRow_Safe(this, EnemyId);
-	if (EnemyDataRow == nullptr)
-		return;
-
-	UUserWidget* HpBarWidget = nullptr;
-	if (bIsBoss)
-	{
-		if (auto* BossHpBar = Cast<URPGBossHpBar>(RPGHelper::GetWidgetInMainWidgetFromName(this, FName("BossHpBar"))))
-		{
-			BossHpBar->SetVisibility(ESlateVisibility::HitTestInvisible);
-			BossHpBar->SetBossNameText(EnemyDataRow->DisplayName);
-			HpBarWidget = BossHpBar;
-		}
-	}
-	else
-	{
-		HpBarWidget = HpBarComponent->GetUserWidgetObject();;
-	}
-	
+	UUserWidget* HpBarWidget = GetHpBarWidget();
 	BindHpBarViewModel(HpBarWidget);
 
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetHPAttribute()).AddLambda(
-		[this](const FOnAttributeChangeData& Data)
-		{
-			if (AAIController* AIController = Cast<AAIController>(GetController()))
-			{
-				if (UBlackboardComponent* Blackboard = AIController->GetBlackboardComponent())
-				{
-					float MaxHP = AttributeSet->GetMaxHP();
-					float HP = AttributeSet->GetHP();
-					if (MaxHP > 0.f)
-					{
-						RPGHelper::SetBlackboardValueAsFloat(this, FName("HpRatio"), AttributeSet->GetHP() / AttributeSet->GetMaxHP());
-					}
-				}
-			}
-		}
-		);
-
-	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetMaxHPAttribute()).AddLambda(
-		[this](const FOnAttributeChangeData& Data)
-		{
-			float MaxHP = AttributeSet->GetMaxHP();
-			float HP = AttributeSet->GetHP();
-			if (MaxHP > 0.f)
-			{
-				RPGHelper::SetBlackboardValueAsFloat(this, FName("HpRatio"), AttributeSet->GetHP() / AttributeSet->GetMaxHP());
-			}
-		}
-		);
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetHPAttribute()).AddUObject(this, &ThisClass::HandleHpChanged);
+	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetMaxHPAttribute()).AddUObject(this, &ThisClass::HandleHpChanged);
 }
 
+UUserWidget* ARPGEnemy::GetHpBarWidget() const
+{
+	return nullptr;
+}
 
 
 void ARPGEnemy::BroadcastKillEnemyMsg()
@@ -281,3 +229,32 @@ void ARPGEnemy::BindHpBarViewModel(UUserWidget* HpBarWidget) const
 		}
 	}
 }
+
+void ARPGEnemy::HandleHpChanged(const FOnAttributeChangeData& Data)
+{
+	if (AAIController* AIController = Cast<AAIController>(GetController()))
+	{
+		if (UBlackboardComponent* Blackboard = AIController->GetBlackboardComponent())
+		{
+			float MaxHP = AttributeSet->GetMaxHP();
+			float HP = AttributeSet->GetHP();
+			if (MaxHP > 0.f)
+			{
+				RPGHelper::SetBlackboardValueAsFloat(this, FName("HpRatio"), AttributeSet->GetHP() / AttributeSet->GetMaxHP());
+			}
+		}
+	}
+}
+
+void ARPGEnemy::StartBehaviorTree()
+{
+	if (BehaviorTree == nullptr)
+		return;
+	
+	if (AAIController* AIController = Cast<AAIController>(GetController()))
+	{
+		AIController->RunBehaviorTree(BehaviorTree);
+	}
+}
+
+

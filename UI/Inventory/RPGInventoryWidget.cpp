@@ -1,6 +1,7 @@
 #include "UI/Inventory/RPGInventoryWidget.h"
 #include "RPGDefines.h"
 #include "RPGInventorySlots.h"
+#include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Message/RPGGameMessage.h"
 #include "UI/Common/RPGIndexedButton.h"

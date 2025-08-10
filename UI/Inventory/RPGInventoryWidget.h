@@ -25,8 +25,10 @@ public:
 	
 private:
 	void BindWidgets();
-	
+
+	UFUNCTION()
 	void HandleInventoryTabClicked(int32 ButtonIndex);
+	
 	void HandleChangedGoldMsg(FGameplayTag, const FGoldChangedMsg& Msg);
 	
 private:

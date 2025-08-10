@@ -1,21 +1,17 @@
 
 #include "Character/RPGPlayerCharacter.h"
 #include "NiagaraFunctionLibrary.h"
-#include "RPGHelperLibrary.h"
 #include "RPGPlayerCaptureCharacter.h"
 #include "AbilitySystem/RPGAbilitySystemComponent.h"
-#include "Actor/RPGEquipmentActor.h"
 #include "Camera/CameraComponent.h"
-#include "Components/RPGEquipmentComponent.h"
+#include "Components/RPGEquipMeshManagerComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Components/RPGInteractionComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/SplineComponent.h"
 #include "Interface/InteractableInterface.h"
-#include "Item/Fragment/RPGItemFragment_Armor.h"
 #include "Kismet/GameplayStatics.h"
-#include "Message/RPGGameMessage.h"
 #include "Player/RPGPlayerState.h"
 
 
@@ -48,6 +44,7 @@ ARPGPlayerCharacter::ARPGPlayerCharacter()
 
 	SplineComponent = CreateDefaultSubobject<USplineComponent>(TEXT("SplineComp"));
 	InteractionComponent = CreateDefaultSubobject<URPGInteractionComponent>(TEXT("InteractionComp"));
+	EquipMeshManagerComponent = CreateDefaultSubobject<URPGEquipMeshManagerComponent>(TEXT("EquipMeshManagerComp"));
 }
 
 
@@ -55,23 +52,16 @@ ARPGPlayerCharacter::ARPGPlayerCharacter()
 void ARPGPlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (PlayerCaptureCharacterClass)
+	{
+		GetWorld()->SpawnActor(PlayerCaptureCharacterClass);
+	}
 	
 	InteractionSphereComponent->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnInteractionSphereBeginOverlap);
 	InteractionSphereComponent->OnComponentEndOverlap.AddDynamic(this, &ThisClass::OnInteractionSphereEndOverlap);
 
 }
-
-void ARPGPlayerCharacter::Initialize()
-{
-	RPGMessage::RegisterListener(this, FGameplayTag::RequestGameplayTag(FName("Player.ChangeEquipment")),
-			this, &ThisClass::HandleOnPlayerEquipmentChange);
-	
-	if (PlayerCaptureCharacterClass)
-	{
-		GetWorld()->SpawnActor(PlayerCaptureCharacterClass);
-	}
-}
-
 
 void ARPGPlayerCharacter::InitAbilityInfo()
 {
@@ -105,55 +95,6 @@ void ARPGPlayerCharacter::OnLevelChanged(const int32 NewLevel,  bool bLevelUp) c
 	
 }
 
-void ARPGPlayerCharacter::HandleOnPlayerEquipmentChange(FGameplayTag, const FOnPlayerChangeEquipmentMsg& Msg)
-{
-	if (Msg.EquipItemInstance == nullptr)
-		return;
-
-	auto* ItemFragment_Equippable = Msg.EquipItemInstance->FindFragmentByClass<URPGItemFragment_Equippable>();
-	if (ItemFragment_Equippable == nullptr)
-		return;
-
-	EEquipmentType EquipmentType = ItemFragment_Equippable->EquipmentType;
-	
-	if (EquipmentType == EEquipmentType::Weapon)
-	{
-		if (WeaponActor)
-		{
-			WeaponActor->Destroy();
-			WeaponActor = nullptr;
-		}
-
-		if (Msg.bIsEquipped)
-		{
-			auto* ItemFragment_Attachable = Msg.EquipItemInstance->FindFragmentByClass<URPGItemFragment_Attachable>();
-			if (ItemFragment_Attachable == nullptr)
-				return;
-			
-			if (ARPGEquipmentActor* NewWeaponActor = GetWorld()->SpawnActorDeferred<ARPGEquipmentActor>(ARPGEquipmentActor::StaticClass(),
-				FTransform::Identity, this, this, ESpawnActorCollisionHandlingMethod::AlwaysSpawn))
-			{
-				NewWeaponActor->SetMesh(ItemFragment_Attachable->AttachMesh);
-				NewWeaponActor->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, ItemFragment_Attachable->AttachSocketName);
-				NewWeaponActor->FinishSpawning(FTransform::Identity);
-				WeaponActor = NewWeaponActor;
-			}
-		}
-	}
-	else if (EquipmentType == EEquipmentType::Armor)
-	{
-		const URPGItemFragment_Armor* ItemFragment_Armor = Cast<URPGItemFragment_Armor>(ItemFragment_Equippable);
-		if (ItemFragment_Armor == nullptr)
-			return;
-		
-		USkeletalMeshComponent* ArmorSK = FindComponentByTag<USkeletalMeshComponent>(RPGHelper::ArmorTypeToName(ItemFragment_Armor->ArmorType));
-		if (ArmorSK == nullptr)
-			return;
-
-		USkeletalMesh* ArmorMesh = Msg.bIsEquipped == true ? ItemFragment_Armor->AttachMesh : nullptr;
-		ArmorSK->SetSkeletalMesh(ArmorMesh);
-	}
-}
 
 
 void ARPGPlayerCharacter::OnInteractionSphereBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

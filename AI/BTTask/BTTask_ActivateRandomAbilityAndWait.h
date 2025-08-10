@@ -18,6 +18,7 @@ class RPGPROJECT_API UBTTask_ActivateRandomAbilityAndWait : public UBTTaskNode
 protected:
 	UBTTask_ActivateRandomAbilityAndWait();
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+	virtual void OnTaskFinished(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, EBTNodeResult::Type TaskResult) override;
 
 	void OnAbilityEnded(UGameplayAbility* EndedAbility);
 
@@ -32,5 +33,7 @@ protected:
 	float WaitTimeAfterAbilityEnd = 0.f;
 
 	UPROPERTY()
-	TObjectPtr<UBehaviorTreeComponent> BTComponent; 
+	TObjectPtr<UBehaviorTreeComponent> BTComponent;
+
+	FTimerHandle WaitTimerHandle;
 };

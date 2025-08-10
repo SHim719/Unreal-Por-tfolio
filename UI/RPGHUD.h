@@ -23,6 +23,7 @@ class RPGPROJECT_API ARPGHUD : public AHUD
 
 public:
 	void Initialize();
+	
 	URPGMainWidget* GetMainWidget() const {return MainWidget;}
 	TSubclassOf<URPGTooltipWidget> GetTooltipWidgetClass(const ERPGTooltipType TooltipType) const;
 	TSubclassOf<URPGDecideCountWidget> GetSplitQuantityWidgetClass() const { return SplitQuantityWidgetClass;}
@@ -31,6 +32,9 @@ public:
 public:
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<UMVVM_ProgressBar> VM_GlobeHpBar;
+	
+	UPROPERTY(BlueprintReadOnly)
+	TObjectPtr<UMVVM_ProgressBar> VM_GlobeMpBar;
 
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<UMVVM_ProgressBar> VM_ExpBar;

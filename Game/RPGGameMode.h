@@ -15,6 +15,7 @@ class RPGPROJECT_API ARPGGameMode : public AGameMode
 
 public:
 	virtual void BeginPlay() override;
+	virtual void HandleMatchHasStarted() override;
 	virtual AActor* ChoosePlayerStart_Implementation(AController* Player) override;
 
 private:

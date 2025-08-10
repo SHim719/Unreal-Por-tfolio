@@ -25,8 +25,12 @@ void ARPGExplosionActor::OnReturnToPool()
 {
 	Super::OnReturnToPool();
 
-	RadialIndicator->Destroy();
-	RadialIndicator = nullptr;
+	if (RadialIndicator)
+	{
+		RadialIndicator->Destroy();
+		RadialIndicator = nullptr;
+	}
+	
 	CurTime = 0.f;
 }
 

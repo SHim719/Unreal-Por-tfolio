@@ -11,7 +11,9 @@ public class RPGProject : ModuleRules
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "NavigationSystem",
 	        "AIModule", "Niagara", "EnhancedInput", "GameplayTags", "GameplayTasks", "GameplayAbilities",
 	        "GameplayMessageRuntime",  "Slate", 
-	        "SlateCore", "MotionWarping",
+	        "SlateCore", "MotionWarping", "LevelSequence",
+	        "MovieScene",
+	        "MovieSceneTracks"
         });
         
         PrivateDependencyModuleNames.AddRange(new string[] {  });

@@ -4,6 +4,7 @@
 #include "RPGMainWidget.h"
 #include "ObjectPool/RPGPoolManager.h"
 #include "DamageText/RPGDamageText.h"
+#include "Sequence/RPGSequenceManager.h"
 #include "Tooltip/RPGTooltipManager.h"
 
 
@@ -12,6 +13,7 @@
 void ARPGHUD::Initialize()
 {
 	VM_GlobeHpBar = NewObject<UMVVM_ProgressBar>(this, UMVVM_ProgressBar::StaticClass());
+	VM_GlobeMpBar = NewObject<UMVVM_ProgressBar>(this, UMVVM_ProgressBar::StaticClass());
 	VM_ExpBar = NewObject<UMVVM_ProgressBar>(this, UMVVM_ProgressBar::StaticClass());
 	
 	MainWidget = CreateWidget<URPGMainWidget>(GetGameInstance(), MainWidgetClass);
@@ -30,6 +32,7 @@ void ARPGHUD::Initialize()
 		RPGHelper::GetPoolManager(this)->CreateNewPool("DamageNumber", DamageTextWidgetClass, 20, 50, true);
 	}
 }
+
 
 TSubclassOf<URPGTooltipWidget> ARPGHUD::GetTooltipWidgetClass(const ERPGTooltipType TooltipType) const
 {

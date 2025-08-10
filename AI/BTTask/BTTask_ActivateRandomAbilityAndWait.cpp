@@ -40,6 +40,14 @@ EBTNodeResult::Type UBTTask_ActivateRandomAbilityAndWait::ExecuteTask(UBehaviorT
 	return EBTNodeResult::InProgress;
 }
 
+void UBTTask_ActivateRandomAbilityAndWait::OnTaskFinished(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory,
+	EBTNodeResult::Type TaskResult)
+{
+	Super::OnTaskFinished(OwnerComp, NodeMemory, TaskResult);
+
+	OwnerComp.GetWorld()->GetTimerManager().ClearTimer(WaitTimerHandle);
+}
+
 void UBTTask_ActivateRandomAbilityAndWait::OnAbilityEnded(UGameplayAbility* EndedAbility)
 {
 	if (auto* ASC = EndedAbility->GetAbilitySystemComponentFromActorInfo())

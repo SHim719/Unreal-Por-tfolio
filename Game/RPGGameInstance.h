@@ -16,5 +16,4 @@ class RPGPROJECT_API URPGGameInstance : public UGameInstance
 	
 	
 public:
-	FName PlayerStartTag = FName("Start");	
 };

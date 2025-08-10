@@ -2,8 +2,8 @@
 
 #include "RPGHelperLibrary.h"
 #include "Components/SphereComponent.h"
-#include "Game/RPGGameInstance.h"
 #include "Kismet/GameplayStatics.h"
+#include "LevelChange/RPGLevelChangeManager.h"
 
 
 ARPGPortalActor::ARPGPortalActor()
@@ -26,14 +26,14 @@ void ARPGPortalActor::Interact()
 	{
 		PlayerDataManager->SaveCurrentPlayerData();
 	}
-	
-	UGameplayStatics::OpenLevel(this, ChangeLevelName);
 
-	if (URPGGameInstance* GameInstance = Cast<URPGGameInstance>(GetGameInstance()))
+	if (auto* LevelChangeManager = RPGHelper::GetLevelChangeManager(this))
 	{
-		GameInstance->PlayerStartTag = PlayerStartTag;
+		LevelChangeManager->ReserveLevelChange(PlayerStartTag, ChangeLevelName);
 	}
 }
+
+
 
 
 

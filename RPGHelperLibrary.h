@@ -7,6 +7,8 @@
 #include "UI/RPGHUD.h"
 
 
+class URPGSequenceManager;
+class URPGLevelChangeManager;
 class UBlackboardComponent;
 class URPGTextManager;
 class URPGPlayerDataManager;
@@ -44,6 +46,8 @@ namespace RPGHelper
 	URPGDialogueManager* GetDialogueManager(const UObject* WorldContextObject);
 	URPGPlayerDataManager* GetPlayerDataManager(const UObject* WorldContextObject);
 	URPGTextManager* GetTextManager(const UObject* WorldContextObject);
+	URPGLevelChangeManager* GetLevelChangeManager(const UObject* WorldContextObject);
+	URPGSequenceManager* GetSequenceManager(const UObject* WorldContextObject);
 
 	ARPGPlayerCharacter* GetPlayerCharacter_Safe(const UObject* WorldContextObject);
 	ARPGPlayerState* GetPlayerState_Safe(const UObject* WorldContextObject);

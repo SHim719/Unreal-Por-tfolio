@@ -17,7 +17,9 @@
 #include "Data/Text/RPGTextManager.h"
 #include "Dialogue/RPGDialogueManager.h"
 #include "Kismet/GameplayStatics.h"
+#include "LevelChange/RPGLevelChangeManager.h"
 #include "ObjectPool/RPGPoolManager.h"
+#include "Sequence/RPGSequenceManager.h"
 #include "UI/RPGHUD.h"
 #include "UI/RPGMainWidget.h"
 #include "UI/Tooltip/RPGTooltipManager.h"
@@ -280,6 +282,38 @@ URPGTextManager* RPGHelper::GetTextManager(const UObject* WorldContextObject)
 		return nullptr;
 	
 	return GameInstance->GetSubsystem<URPGTextManager>();
+}
+
+URPGLevelChangeManager* RPGHelper::GetLevelChangeManager(const UObject* WorldContextObject)
+{
+	if (WorldContextObject == nullptr)
+		return nullptr;
+
+	const UWorld* World = WorldContextObject->GetWorld();
+	if (World == nullptr)
+		return nullptr;
+	
+	const auto* GameInstance = World->GetGameInstance();
+	if (GameInstance == nullptr)
+		return nullptr;
+	
+	return GameInstance->GetSubsystem<URPGLevelChangeManager>();
+}
+
+URPGSequenceManager* RPGHelper::GetSequenceManager(const UObject* WorldContextObject)
+{
+	if (WorldContextObject == nullptr)
+		return nullptr;
+
+	const UWorld* World = WorldContextObject->GetWorld();
+	if (World == nullptr)
+		return nullptr;
+	
+	const auto* GameInstance = World->GetGameInstance();
+	if (GameInstance == nullptr)
+		return nullptr;
+	
+	return GameInstance->GetSubsystem<URPGSequenceManager>();
 }
 
 ARPGPlayerCharacter* RPGHelper::GetPlayerCharacter_Safe(const UObject* WorldContextObject)

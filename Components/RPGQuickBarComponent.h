@@ -67,7 +67,7 @@ private:
 	
 	TArray<FRefSlotInfo> RefSlotInfos;
 	
-	const int32 SlotCount = 5;
+	const int32 SlotCount = 6;
 };
 
 

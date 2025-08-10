@@ -6,6 +6,9 @@
 #include "Character/RPGCharacterBase.h"
 #include "RPGEnemy.generated.h"
 
+struct FRPGEnemyDataRow;
+struct FOnAttributeChangeData;
+class ULevelSequence;
 class UGameplayEffect;
 class UBehaviorTree;
 class UWidgetComponent;
@@ -30,19 +33,23 @@ public:
 protected:
 	void InitAttributes();
 	void BindAttributeDelegate();
+
+	virtual UUserWidget* GetHpBarWidget() const;
 	void BindHpBarViewModel(UUserWidget* HpBarWidget) const;
-	
+
+	virtual void HandleHpChanged(const FOnAttributeChangeData& Data);
+
+	void StartBehaviorTree();
+protected:
 	void BroadcastKillEnemyMsg();
 	void DropItems() const;
 	void GiveExpToPlayer() const;
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void ShowHitVFX();
+
 	
 protected:
-	UPROPERTY(EditDefaultsOnly)
-	TObjectPtr<UWidgetComponent> HpBarComponent;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Enemy|Weapon")
 	TObjectPtr<USkeletalMeshComponent> WeaponMesh;
 
@@ -54,9 +61,6 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy")
 	FName EnemyId;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Enemy")
-	bool bIsBoss;
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<UGameplayEffect> InitAttributesEffect;

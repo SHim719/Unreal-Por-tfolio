@@ -31,4 +31,7 @@ private:
 
 	UPROPERTY()
 	TArray<TObjectPtr<UTextBlock>> SlotKeyTextBlocks;
+
+	UPROPERTY(EditDefaultsOnly)
+	int32 QuickBarSlotNum = 6;
 };

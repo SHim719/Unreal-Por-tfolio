@@ -56,7 +56,7 @@ private:
 	TArray<FRefSlotInfo> QuickBarRefSlotInfoDatas;
 
 	int32 Level = 1;
-	int32 SkillPoint = 1;
+	int32 SkillPoint = 5;
 	
 	float Hp = -1;
 	float Exp = -1;

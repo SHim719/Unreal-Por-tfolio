@@ -82,11 +82,6 @@ void URPGPlayerDataManager::SaveCurrentPlayerData()
 
 void URPGPlayerDataManager::LoadCurrentPlayerData()
 {
-	if (ARPGPlayerCharacter* PlayerCharacter = RPGHelper::GetPlayerCharacter_Safe(GetGameInstance()))
-	{
-		PlayerCharacter->Initialize();
-	}
-	
 	if (ARPGPlayerState* PS = RPGHelper::GetPlayerState_Safe(this))
 	{
 		PS->Initialize(Level);
