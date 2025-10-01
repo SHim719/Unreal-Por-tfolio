@@ -49,7 +49,6 @@ https://www.youtube.com/watch?v=QNZ20ZTuVFo
 
 ## 퀘스트
 <img src="https://github.com/SHim719/Image/blob/main/Quest%EA%B5%AC%EC%A1%B0.png" alt="이미지" width="700" height="600">
-<img src="https://github.com/SHim719/Image/blob/main/QuestPrerequirements.png" alt="이미지" width="700">
 <img src="https://github.com/SHim719/Image/blob/main/QuestTask.png" alt="이미지" width="700">
 
 
