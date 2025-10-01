@@ -32,7 +32,7 @@ https://www.youtube.com/watch?v=QNZ20ZTuVFo
 - 확률 옵션들의 관리는 ProcComponent가 이벤트 수신과 관리를 담당합니다. 이벤트 발생 시, 확률 계산 후 옵션을 ProcEffect에 명시되어있는 대상에게 적용합니다.
 
  ## 스킬
- <img src="https://github.com/SHim719/Image/blob/main/Ability%EA%B5%AC%EC%A1%B0.png" alt="이미지" width="800" height ="500">
+ <img src="https://github.com/SHim719/Image/blob/main/Ability%EA%B5%AC%EC%A1%B0.png" alt="이미지" width="700" height ="500">
 
 - 스킬들은 GameplayAbility를 상속해서 큰 분류의 스킬 클래스를 만들고 이를 상속하여 파라미터를 조절하는 방식으로 구현했습니다. 
 - 근접 스킬 같은 경우는 애니메이션과 타격 횟수 파라미터를 조정하고, Projectile이나 AOE 스킬은 Actor Class만 바꿔줌으로써, 다양한 스킬을 쉽게 정의할 수 있습니다. 
