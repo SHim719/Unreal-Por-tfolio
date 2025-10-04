@@ -56,7 +56,7 @@ https://www.youtube.com/watch?v=QNZ20ZTuVFo
 
   
 ## 퀘스트 시스템의 동작
-<img src="https://github.com/SHim719/Image/blob/main/%ED%80%98%EC%8A%A4%ED%8A%B8UML.png" alt="이미지" width="600" height="800">
+<img src="https://github.com/SHim719/Image/blob/main/%ED%80%98%EC%8A%A4%ED%8A%B8UML.png" alt="이미지" width="500" >
 
 - 퀘스트 시스템은 NPC, QuestManager, UI 간의 메시지 전파 구조를 기반으로 설계했습니다.
 - 플레이어가 대화를 통해 퀘스트를 수락하거나 포기하면 QuestManager는 해당 변경 메시지를 전파하고, UI와 NPC는 이를 수신해 업데이트합니다.
@@ -64,8 +64,8 @@ https://www.youtube.com/watch?v=QNZ20ZTuVFo
 
 
 ## 오브젝트 풀
-<img src="https://github.com/SHim719/Image/blob/main/%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8%ED%92%801.png" alt="이미지" height="300">
-<img src="https://github.com/SHim719/Image/blob/main/%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8%ED%92%80%EC%BD%94%EB%93%9C2.png" alt="이미지" height="300">
+<img src="https://github.com/SHim719/Image/blob/main/%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8%ED%92%801.png" alt="이미지" height="400">
+<img src="https://github.com/SHim719/Image/blob/main/%EC%98%A4%EB%B8%8C%EC%A0%9D%ED%8A%B8%ED%92%80%EC%BD%94%EB%93%9C2.png" alt="이미지" height="400">
 
 - 투사체, 스킬 오브젝트, 데미지 숫자 UI 등 자주 반복 생성/삭제되는 객체의 생성/삭제의 오버헤드를 최소화하기 위해 오브젝트 풀을 구현했습니다.
 
