@@ -77,7 +77,7 @@ https://www.youtube.com/watch?v=QNZ20ZTuVFo
 
 - 프레임이 낮아서 UnrealInsights로 프로파일링을 해보니 인벤토리에 플레이어를 띄우는 SceneCaptureComponent가 큰 부하를 주는 것을 확인했습니다.
 - SceneCaptureComponent가 인벤토리를 열지 않았을 때에도 동작하고 있었고, 매 프레임 렌더링하고 있어서 프레임 드랍이 생긴다는 것을 발견했습니다.
-- 인벤토리를 열때만 플레이어를 Capture하도록 세팅하고, Tick 주기를 0.1초정도로 조정하고 PlayerCaptureCharacter의 Tick 함수에서 SceneCaptureComponent의 Capture를 수동으로 호출하여 렌더링 프레임을 조절하였습니다.
+- 인벤토리를 열때만 플레이어를 Capture하도록 세팅하고, PlayerCaptureCharacter의 Tick 주기를 0.1초정도로 조정하고 Tick 함수에서 SceneCaptureComponent의 Capture를 수동으로 호출하여 렌더링 프레임을 조절하였습니다.
 
 
 
