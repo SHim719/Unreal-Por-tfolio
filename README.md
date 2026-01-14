@@ -1,7 +1,9 @@
 <div align="center">
   
-# 쿼터뷰 싱글 RPG 프로젝트(Unreal Engine 5, GAS, 1人)
+# 쿼터뷰 싱글 RPG 프로젝트(개인 프로젝트)
 <img src="https://github.com/SHim719/Image/blob/main/%EC%96%B8%EB%A6%AC%EC%96%BCRPG%ED%91%9C%EC%A7%80.png" alt="이미지" width="500">
+
+**기술 스택: C++, Unreal Engine 5.5.4, Gameplay Ability System, Github Desktop**
 
 </div>
 
