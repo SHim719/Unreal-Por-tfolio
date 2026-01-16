@@ -47,17 +47,23 @@ https://www.youtube.com/watch?v=QNZ20ZTuVFo
 - 이로 인해 스킬 트리 구조가 변경되더라도 UI를 블루프린트에서 일일이 수정할 필요 없이, 데이터 수정만으로 자동 반영될 수 있어서 효과적이고 빠르게 스킬트리를 UI를 만들 수 있었습니다.
 
 
+- 위젯을 수동으로 배치하는 하드코딩 방식을 지양하고, DataAsset에 정의된 그리드(Row, Column) 데이터를 기반으로 스킬이 자동 배치되도록 구현했습니다.
+- 스킬 간의 연결선 역시 블루프린트 상에서 수동으로 배치하는 방식이 아닌, NativePaint() 함수에서 스킬들의 연결 관계를 읽어와 자동으로 선을 그려주는 구조로 구성했습니다.
+- 이로 인해 스킬 트리 구조가 변경되더라도 UI를 블루프린트에서 일일이 수정할 필요 없이, 데이터 수정만으로 자동 반영될 수 있어서 효과적이고 빠르게 스킬트리를 UI를 만들 수 있었습니다.
+
+<br>
 
 ## 퀘스트
-<img src="https://github.com/SHim719/Image/blob/main/Quest%EA%B5%AC%EC%A1%B0.png" alt="이미지" width="700" height="600">
-<img src="https://github.com/SHim719/Image/blob/main/QuestTask.png" alt="이미지" width="700">
+<img src="https://github.com/SHim719/Image/blob/main/Quest%EA%B5%AC%EC%A1%B0.png" alt="퀘스트 구조" width="700" height="600">
+<img src="https://github.com/SHim719/Image/blob/main/QuestTask.png" alt="퀘스트 태스크" width="700">
 
-- 퀘스트의 Task(목표)와 Prerequirement(요구사항)는 상속 가능한 베이스 클래스를 기반으로 설계하여, 다양한 퀘스트 유형을 유연하게 확장할 수 있도록 구성했습니다. 
+- 퀘스트의 Task(목표)와 Prerequirement(요구사항)는 상속 가능한 베이스 클래스를 기반으로 설계하여, 다양한 퀘스트 유형을 유연하게 확장할 수 있도록 구성했습니다.
 - 이를 통해 "몬스터 처치", "아이템 수집" 같은 퀘스트 목표를 모듈식으로 재사용하고, 퀘스트 조건 또한 독립적으로 조합할 수 있습니다.
 
-  
+<br>
+
 ## 퀘스트 시스템의 동작
-<img src="https://github.com/SHim719/Image/blob/main/%ED%80%98%EC%8A%A4%ED%8A%B8UML.png" alt="이미지" width="500" >
+<img src="https://github.com/SHim719/Image/blob/main/%ED%80%98%EC%8A%A4%ED%8A%B8UML.png" alt="퀘스트 UML" width="500">
 
 - 퀘스트 시스템은 NPC, QuestManager, UI 간의 메시지 전파 구조를 기반으로 설계했습니다.
 - 플레이어가 대화를 통해 퀘스트를 수락하거나 포기하면 QuestManager는 해당 변경 메시지를 전파하고, UI와 NPC는 이를 수신해 업데이트합니다.
