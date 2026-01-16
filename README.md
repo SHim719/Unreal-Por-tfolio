@@ -46,6 +46,8 @@ https://www.youtube.com/watch?v=QNZ20ZTuVFo
 - 스킬 간의 연결선 역시 블루프린트 상에서 수동으로 배치하는 방식이 아닌, NativePaint() 함수에서 스킬들의 연결 관계를 읽어와 자동으로 선을 그려주는 구조로 구성했습니다.
 - 이로 인해 스킬 트리 구조가 변경되더라도 UI를 블루프린트에서 일일이 수정할 필요 없이, 데이터 수정만으로 자동 반영될 수 있어서 효과적이고 빠르게 스킬트리를 UI를 만들 수 있었습니다.
 
+
+
 ## 퀘스트
 <img src="https://github.com/SHim719/Image/blob/main/Quest%EA%B5%AC%EC%A1%B0.png" alt="이미지" width="700" height="600">
 <img src="https://github.com/SHim719/Image/blob/main/QuestTask.png" alt="이미지" width="700">
