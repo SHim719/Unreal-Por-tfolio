@@ -40,12 +40,7 @@ https://www.youtube.com/watch?v=QNZ20ZTuVFo
 
 ## 데이터 기반 스킬 트리와 UI 자동화
 <img src="https://github.com/SHim719/Image/blob/main/%EC%8A%A4%ED%82%AC%ED%8A%B8%EB%A6%AC%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7.png" alt="이미지" width="500" height ="400">
-<img src="https://github.com/SHim719/Image/blob/main/%EC%8A%A4%ED%82%AC%ED%8A%B8%EB%A6%AC%EC%BD%94%EB%93%9C2.png" alt="이미지", height="400>
-
-- 위젯을 수동으로 배치하는 하드코딩 방식을 지양하고, DataAsset에 정의된 그리드(Row, Column) 데이터를 기반으로 스킬이 자동 배치되도록 구현했습니다.
-- 스킬 간의 연결선 역시 블루프린트 상에서 수동으로 배치하는 방식이 아닌, NativePaint() 함수에서 스킬들의 연결 관계를 읽어와 자동으로 선을 그려주는 구조로 구성했습니다.
-- 이로 인해 스킬 트리 구조가 변경되더라도 UI를 블루프린트에서 일일이 수정할 필요 없이, 데이터 수정만으로 자동 반영될 수 있어서 효과적이고 빠르게 스킬트리를 UI를 만들 수 있었습니다.
-
+<img src="https://github.com/SHim719/Image/blob/main/%EC%8A%A4%ED%82%AC%ED%8A%B8%EB%A6%AC%EC%BD%94%EB%93%9C2.png" alt="이미지", height="400">
 
 - 위젯을 수동으로 배치하는 하드코딩 방식을 지양하고, DataAsset에 정의된 그리드(Row, Column) 데이터를 기반으로 스킬이 자동 배치되도록 구현했습니다.
 - 스킬 간의 연결선 역시 블루프린트 상에서 수동으로 배치하는 방식이 아닌, NativePaint() 함수에서 스킬들의 연결 관계를 읽어와 자동으로 선을 그려주는 구조로 구성했습니다.
