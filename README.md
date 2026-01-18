@@ -13,7 +13,7 @@ https://www.youtube.com/watch?v=QNZ20ZTuVFo
 # 프로젝트 구현사항
 
 ## GAS 기반 Data-Driven 아이템 옵션 시스템
-<img src="https://github.com/SHim719/Image/blob/main/%EA%B2%801.png" alt="이미지" width="200"><img src="https://github.com/SHim719/Image/blob/main/%EA%B2%802.png" alt="이미지" width="200"><img src="https://github.com/SHim719/Image/blob/main/%EA%B2%803.png" alt="이미지" width="200">
+<img src="https://github.com/SHim719/Image/blob/main/%EA%B2%801.png" alt="이미지" width="200"><img src="https://github.com/SHim719/Image/blob/main/%EA%B2%802.png" alt="이미지" width="200">
 <img src="https://github.com/SHim719/Image/blob/main/ItemOptionFragment.png" alt="이미지" width="400" height ="500">
 <img src="https://github.com/SHim719/Image/blob/main/%EC%95%84%EC%9D%B4%ED%85%9C%EA%B5%AC%EC%A1%B0.png" alt="이미지" height="600">
 
